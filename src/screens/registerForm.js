@@ -3,9 +3,10 @@ import {
     View, TouchableOpacity, TextInput, Platform, Text, Alert
 
 } from 'react-native';
-import styles from '../styles/registerFormstyle';
+// import styles from '../styles/registerFormstyle';
 import { Field, reduxForm } from 'redux-form';
 import TextinputCommon from '../components/textinputcommon';
+import { connect } from 'react-redux';
 
 
 const validate = values => {
@@ -30,12 +31,14 @@ const validate = values => {
 
 const myAction = values => {
     console.log('values', values);
-    alert('value' + values.email)
+    // alert('value' + values.email)
+
 }
 
-const RegisterForm = props => {
+const RegisterForm = (props) => {
+    console.log("Registration form Props : ", props)
 
-    const { handleSubmit } = props;
+    const { handleSubmit, navigation } = props;
 
 
     return (
@@ -60,10 +63,18 @@ const RegisterForm = props => {
             <View>
                 <TouchableOpacity
                     style={{ minWidth: 150, height: 50, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2AC062', display: 'flex', borderRadius: 5, shadowColor: '#2AC062', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { height: 10, width: 5 }, }}
-                    onPress={handleSubmit(myAction)}>
+                    onPress={handleSubmit(myAction)} {...props}>
                     <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
+
+            <TouchableOpacity
+                style={{ minWidth: 150, height: 50, alignItems: 'center', justifyContent: 'center', backgroundColor: 'blue', display: 'flex', borderRadius: 5, shadowColor: '#2AC062', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { height: 10, width: 5 }, }}
+                onPress={() => handleSubmit(values => navigation.navigate('WelcomeScreen'))}
+
+            >
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>go to screen</Text>
+            </TouchableOpacity>
         </View>
 
         // </form>
@@ -75,5 +86,14 @@ const RegisterForm = props => {
 
 export default reduxForm({
     form: 'Test',
+    onSubmitSuccess: (result, dispatch, props) => {
+        return props.navigation.navigate('WelcomeScreen');
+    },
+    onSubmitFail: (errors, submitError, props, dispatch) => {
+        console.log("Error Ocure ", errors);
+    },
     validate,
+    onSubmit: myAction
 })(RegisterForm);
+
+

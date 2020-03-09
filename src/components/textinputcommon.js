@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: 300,
         height: 50,
-        borderColor: 'black'
+        borderColor: '#2AC062'
     }
 });

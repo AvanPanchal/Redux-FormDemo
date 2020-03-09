@@ -10,7 +10,7 @@ class MainScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <RegisterForm />
+                <RegisterForm {...this.props} />
             </View>
         );
     }

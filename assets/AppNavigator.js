@@ -1,11 +1,12 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import RegisterForm from '../src/screens/registerForm';
-import MainScreen from '../src/screens/MainScreen'
+import MainScreen from '../src/screens/MainScreen';
+import WelcomeScreen from '../src/screens/WelcomeScreen'
 
 const AutoStack = createStackNavigator({
     MainScreen: { screen: MainScreen },
-    RegisterForm: { screen: RegisterForm },
+    WelcomeScreen: { screen: WelcomeScreen },
 }, {
     headerMode: 'none'
 })
